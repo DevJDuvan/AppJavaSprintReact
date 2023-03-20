@@ -6,14 +6,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
 @Entity
 @Table(name = "Users")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
 public class Users {
-
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column (unique = true,nullable = false)
@@ -48,6 +46,9 @@ private Integer status;
     @OneToOne
 	  @JoinColumn(name="status_id")
      private Status userStatus;
+    public Users() {
+    }
+
     public Users(long id, String name, String email,String password, Integer status,Date createdAt,Date updatedAt) {
         this.id = id;
         this.name = name;
@@ -57,6 +58,8 @@ private Integer status;
         this.createdAt= createdAt;
         this.updatedAt=updatedAt;
     }
+
+
 
     public Long getId() {
     return id;

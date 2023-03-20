@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -34,7 +35,9 @@ UserRepository.save(usuario);
 	}
 	@GetMapping(value = "/User")
 	public List<Users> getAllUsers() {
-		return UserRepository.findAll();
+		List<Users> UsersD = new ArrayList<Users>();
+		UserRepository.findByName().forEach(Users -> UsersD.add(Users));
+		return UsersD;
 	}
 	  
 	public UsersRepository getUserRepository() {
