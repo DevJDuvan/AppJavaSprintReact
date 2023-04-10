@@ -11,7 +11,7 @@ function App() {
    <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
         <div className="container">
           <Link to="/" className="navbar-brand fs-3 ubuntu">
-            Rick && Morty <span className="Title">APP</span>
+            Notas <span className="Title">APP</span>
           </Link>
           <style jsx>{`
             button[aria-expanded="false"] > .close {
@@ -67,7 +67,7 @@ useEffect(() => {
 }, [api]);*/
   return (
     <div className="App">
-      <h1 className="text-center mb-3 Title">Capio</h1>
+      <h1 className="text-center mb-3 Title">Notas</h1>
       <div className="container">
         <div className="row">
         
