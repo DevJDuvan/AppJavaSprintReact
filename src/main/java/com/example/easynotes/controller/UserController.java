@@ -23,7 +23,7 @@ public class UserController {
 	  UserController(UsersRepository repository) {
 	    this.UserRepository = repository;
 	  }
-	@PostMapping(value = "/register",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(value = "/register_User",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Users> createUser(@Valid @RequestBody Users user) {
 		EncryptServicesImplement encyptPasswordUser = new EncryptServicesImplement();
 		String HashPass = encyptPasswordUser.EncryptPassword("holla");

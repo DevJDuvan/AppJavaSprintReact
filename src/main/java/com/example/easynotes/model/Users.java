@@ -42,7 +42,7 @@ private Integer status;
     // relacion con tablas notebook o libro usuario tiene varios libros
     @OneToMany( fetch= FetchType.LAZY , mappedBy = "user", cascade = CascadeType.ALL)
     private List<Notebook> notebook;
-    // relacion  con tabla status, usuario uno a uno usuario tiene unestado
+    // relacion  con tabla status, usuario uno a uno usuario tiene un estado
     @OneToOne
 	  @JoinColumn(name="status_id")
      private Status userStatus;
