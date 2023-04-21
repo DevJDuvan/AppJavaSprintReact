@@ -21,6 +21,9 @@ private long id;
 private String name;
 
 @Column (nullable = false)
+private String Img;
+
+    @Column (nullable = false)
 private String email;
 
 @Column (nullable = false)
@@ -49,9 +52,10 @@ private Integer status;
     public Users() {
     }
 
-    public Users(long id, String name, String email,String password, Integer status,Date createdAt,Date updatedAt) {
+    public Users(long id, String name, String Img,String email,String password, Integer status,Date createdAt,Date updatedAt) {
         this.id = id;
         this.name = name;
+        this.Img = Img;
         this.email = email;
         this.password = password;
         this.status = status;
@@ -83,6 +87,8 @@ public String getEmail() {
 public void setEmail(String email) {
     this.email = email;
 }
+    public String getImg(){return Img;}
+    public void setImg(String img){this.Img= img;}
 public String getPassword() {
     return password;
 }

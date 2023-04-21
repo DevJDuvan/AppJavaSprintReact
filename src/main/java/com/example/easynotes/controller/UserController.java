@@ -1,4 +1,6 @@
 package com.example.easynotes.controller;
+import com.example.easynotes.exception.ResourceNotFoundException;
+import com.example.easynotes.model.Note;
 import com.example.easynotes.servicesimplement.EncryptServicesImplement;
 import org.springframework.http.HttpStatus;
 import com.example.easynotes.model.Users;
@@ -27,8 +29,9 @@ public class UserController {
 	public ResponseEntity<Users> createUser(@Valid @RequestBody Users user) {
 		EncryptServicesImplement encyptPasswordUser = new EncryptServicesImplement();
 		String HashPass = encyptPasswordUser.EncryptPassword("holla");
-		System.out.print(HashPass);
-		  Users usuario = new Users(user.getId(), user.getName(), user.getEmail(), user.getPassword(),
+
+		  Users usuario = new Users(user.getId(), user.getName(),user.getImg(),
+				  user.getEmail(), user.getPassword(),
 				                    user.getStatus(),user.getCreatedAt(),user.getUpdatedAt());
 UserRepository.save(usuario);
 		return new ResponseEntity<Users>(usuario,HttpStatus.OK);
@@ -39,6 +42,8 @@ UserRepository.save(usuario);
 		UserRepository.findByName().forEach(Users -> UsersD.add(Users));
 		return UsersD;
 	}
+
+
 	  
 	public UsersRepository getUserRepository() {
 		return UserRepository;
