@@ -1,6 +1,6 @@
 package com.example.easynotes.controller;
 import com.example.easynotes.exception.ResourceNotFoundException;
-import com.example.easynotes.model.Note;
+import com.example.easynotes.model.Status;
 import com.example.easynotes.servicesimplement.EncryptServicesImplement;
 import org.springframework.http.HttpStatus;
 import com.example.easynotes.model.Users;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 import java.util.ArrayList;
@@ -27,13 +26,13 @@ public class UserController {
 	  }
 	@PostMapping(value = "/register_User",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Users> createUser(@Valid @RequestBody Users user) {
+	System.out.print(user.getOtros());
+		System.out.print(user.getUserStatus());
 		EncryptServicesImplement encyptPasswordUser = new EncryptServicesImplement();
 		String HashPass = encyptPasswordUser.EncryptPassword("holla");
-
-		  Users usuario = new Users(user.getId(), user.getName(),user.getImg(),
-				  user.getEmail(), user.getPassword(),
-				                    user.getStatus(),user.getCreatedAt(),user.getUpdatedAt());
-UserRepository.save(usuario);
+		  Users usuario = new Users(user.getId(), user.getName(),
+				  user.getEmail(), user.getOtro(),user.getOtros(),user.getPassword(),user.getUserStatus(),user.getCreatedAt(),user.getUpdatedAt());
+		  UserRepository.save(usuario);
 		return new ResponseEntity<Users>(usuario,HttpStatus.OK);
 	}
 	@GetMapping(value = "/User")

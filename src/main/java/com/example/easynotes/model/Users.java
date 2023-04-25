@@ -20,18 +20,19 @@ private long id;
 @Column (nullable = false)
 private String name;
 
-@Column (nullable = false)
-private String Img;
+
 
     @Column (nullable = false)
 private String email;
 
-@Column (nullable = false)
+    @Column (nullable = false)
+    private String otro;
+
+    @Column (nullable = false)
+    private String otros;
+
+    @Column (nullable = false)
 private String password;
-
-@Column (nullable = false)
-private Integer status;
-
 @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -46,24 +47,41 @@ private Integer status;
     @OneToMany( fetch= FetchType.LAZY , mappedBy = "user", cascade = CascadeType.ALL)
     private List<Notebook> notebook;
     // relacion  con tabla status, usuario uno a uno usuario tiene un estado
-    @OneToOne
-	  @JoinColumn(name="status_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_idstatus")
      private Status userStatus;
     public Users() {
     }
 
-    public Users(long id, String name, String Img,String email,String password, Integer status,Date createdAt,Date updatedAt) {
-        this.id = id;
-        this.name = name;
-        this.Img = Img;
-        this.email = email;
-        this.password = password;
-        this.status = status;
-        this.createdAt= createdAt;
-        this.updatedAt=updatedAt;
+    public String getOtro() {
+        return otro;
+    }
+
+    public void setOtro(String otro) {
+        this.otro = otro;
+    }
+
+    public String getOtros() {
+        return otros;
+    }
+
+    public void setOtros(String otros) {
+        this.otros = otros;
     }
 
 
+
+    public Users(long id, String name, String email, String otro, String otros, String password, Status id_status, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.otro= otro;
+        this.otros= otros;
+        this.password = password;
+        this.userStatus =id_status;
+        this.createdAt= createdAt;
+        this.updatedAt=updatedAt;
+    }
 
     public Long getId() {
     return id;
@@ -87,21 +105,22 @@ public String getEmail() {
 public void setEmail(String email) {
     this.email = email;
 }
-    public String getImg(){return Img;}
-    public void setImg(String img){this.Img= img;}
 public String getPassword() {
     return password;
 }
 public void setPassword(String password) {
     this.password= password;
 }
-public Integer getStatus() {
-    return status;
-}
 
-public void setStatus(Integer status) {
-    this.status = status;
-}
+    public Status getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Status userStatus) {
+        this.userStatus = userStatus;
+    }
+
+
 public Date getCreatedAt() {
     return createdAt;
 }
