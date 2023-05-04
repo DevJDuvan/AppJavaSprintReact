@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class UserController {
 	  @Autowired
-	 
+
 	  private final  UsersRepository UserRepository;
 
 	  UserController(UsersRepository repository) {
@@ -32,8 +32,8 @@ public class UserController {
 		String HashPass = encyptPasswordUser.EncryptPassword("holla");
 		  Users usuario = new Users(user.getId(), user.getName(),
 				  user.getEmail(), user.getOtro(),user.getOtros(),user.getPassword(),user.getUserStatus(),user.getCreatedAt(),user.getUpdatedAt());
-		  UserRepository.save(usuario);
-		return new ResponseEntity<Users>(usuario,HttpStatus.OK);
+
+		return new ResponseEntity<Users>(UserRepository.save(u),HttpStatus.OK);
 	}
 	@GetMapping(value = "/User")
 	public List<Users> getAllUsers() {

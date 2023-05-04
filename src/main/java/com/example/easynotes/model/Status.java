@@ -1,65 +1,70 @@
 package com.example.easynotes.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import java.util.Date;
 import java.util.List;
+
 @Entity
 @Table(name = "Status")
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
-allowGetters = true)
+        allowGetters = true)
 public class Status {
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	   private Long id;
-	  
-	  @NotBlank
-	  @Column(nullable = false)
-	   private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	  @Column(nullable = false, updatable = false)
-	  @Temporal(TemporalType.TIMESTAMP)
-	  @CreatedDate
-	    private Date createdAt;
-	  @Column(nullable = false)
-	  @Temporal(TemporalType.TIMESTAMP)
-	  @LastModifiedDate
-	    private Date updatedAt;
+    @NotBlank
+    @Column(nullable = false)
+    private String name;
 
-	    @OneToOne(mappedBy="userStatus",cascade = CascadeType.ALL)
-	    private Users user;
-	  
-	   public Long getId() {
-	        return id;
-	    }
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdAt;
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date updatedAt;
 
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
-	public String getname() {
-		return name;
-	}
+    @OneToOne(mappedBy = "userStatus")
+    private Users user;
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	    public Date getCreatedAt() {
-	        return createdAt;
-	    }
+    public Long getId() {
+        return id;
+    }
 
-	    public void setCreatedAt(Date createdAt) {
-	        this.createdAt = createdAt;
-	    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	    public Date getUpdatedAt() {
-	        return updatedAt;
-	    }
+    public String getname() {
+        return name;
+    }
 
-	    public void setUpdatedAt(Date updatedAt) {
-	        this.updatedAt = updatedAt;
-	    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
