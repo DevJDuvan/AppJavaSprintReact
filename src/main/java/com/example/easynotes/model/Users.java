@@ -27,12 +27,6 @@ public class Users {
     private String email;
 
     @Column(nullable = false)
-    private String otro;
-
-    @Column(nullable = false)
-    private String otros;
-
-    @Column(nullable = false)
     private String password;
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -50,38 +44,10 @@ public class Users {
     // relacion  con tabla status, usuario uno a uno usuario tiene un estado
     @OneToOne
     @JoinColumn(name = "fk_idstatus")
+    @Enumerated(EnumType.ORDINAL)
     private Status userStatus;
 
     public Users() {
-    }
-
-    public String getOtro() {
-        return otro;
-    }
-
-    public void setOtro(String otro) {
-        this.otro = otro;
-    }
-
-    public String getOtros() {
-        return otros;
-    }
-
-    public void setOtros(String otros) {
-        this.otros = otros;
-    }
-
-
-    public Users(long id, String name, String email, String otro, String otros, String password, Status id_status, Date createdAt, Date updatedAt) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.otro = otro;
-        this.otros = otros;
-        this.password = password;
-        this.userStatus = id_status;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public Long getId() {
@@ -116,13 +82,7 @@ public class Users {
         this.password = password;
     }
 
-    public Status getUserStatus() {
-        return userStatus;
-    }
 
-    public void setUserStatus(Status userStatus) {
-        this.userStatus = userStatus;
-    }
 
 
     public Date getCreatedAt() {
@@ -141,5 +101,12 @@ public class Users {
         this.updatedAt = updatedAt;
     }
 
+    public Status getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Status userStatus) {
+        this.userStatus = userStatus;
+    }
 
 }

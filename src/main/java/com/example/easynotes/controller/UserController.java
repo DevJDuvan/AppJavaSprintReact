@@ -26,20 +26,23 @@ public class UserController {
 	  }
 	@PostMapping(value = "/register_User",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Users> createUser(@Valid @RequestBody Users user) {
-	System.out.print(user.getOtros());
+
 		System.out.print(user.getUserStatus());
 		EncryptServicesImplement encyptPasswordUser = new EncryptServicesImplement();
 		String HashPass = encyptPasswordUser.EncryptPassword("holla");
-		  Users usuario = new Users(user.getId(), user.getName(),
-				  user.getEmail(), user.getOtro(),user.getOtros(),user.getPassword(),user.getUserStatus(),user.getCreatedAt(),user.getUpdatedAt());
 
-		return new ResponseEntity<Users>(UserRepository.save(u),HttpStatus.OK);
+		return new ResponseEntity<Users>(UserRepository.save(user),HttpStatus.OK);
 	}
-	@GetMapping(value = "/User")
-	public List<Users> getAllUsers() {
+	@GetMapping(value = "/UserbyName")
+	public List<Users> getbyName() {
 		List<Users> UsersD = new ArrayList<Users>();
 		UserRepository.findByName().forEach(Users -> UsersD.add(Users));
 		return UsersD;
+	}
+
+	@GetMapping(value = "/UserAllUsers")
+	public ResponseEntity<List<Users>> getAllUsers() {
+		return new ResponseEntity<>(UserRepository.findAll(), HttpStatus.OK);
 	}
 
 
