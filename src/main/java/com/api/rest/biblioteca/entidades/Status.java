@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -13,31 +12,46 @@ import java.util.List;
 
 @Entity
 @Table(name = "Status")
+@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
 public class Status {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @NotBlank
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdAt;
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
     @LastModifiedDate
     private Date updatedAt;
 
-    public Long getId() {
+    public Status(int id, String name, Date createdAt,Date updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.createdAt= createdAt;
+        this.updatedAt=updatedAt;
+    }
+
+    public Status() {
+
+    }
+
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -64,4 +78,5 @@ public class Status {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 }

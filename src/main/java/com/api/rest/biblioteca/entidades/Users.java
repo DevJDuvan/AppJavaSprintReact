@@ -28,7 +28,7 @@ public class Users {
 
     @Column(nullable = false)
     private String password;
-    @Column( updatable = false)
+    @Column()
     @Temporal(TemporalType.DATE)
     @CreatedDate
     private Date createdAt;
@@ -47,13 +47,22 @@ public class Users {
 
 
     // relacion  con tabla status, usuario uno a uno usuario tiene un estado
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "fk_idstatus")
-    @Enumerated(EnumType.ORDINAL)
     private Status userStatus;
+
+
     public Users() {
     }
+    public Users( String name, String email,String password, Status status,Date createdAt,Date updatedAt) {
 
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.userStatus = status;
+        this.createdAt= createdAt;
+        this.updatedAt=updatedAt;
+    }
     public int getId() {
         return id;
     }
